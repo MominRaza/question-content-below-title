@@ -1,0 +1,14 @@
+{
+	"name": "Question Content Below Title",
+	"uri": "https://github.com/MominRaza/question-content-below-title",
+	"description": "Shows question content with first image below title in question lists",
+	"version": "1.0",
+	"date": "2021-01-17",
+	"author": "Momin Raza",
+	"author_uri": "https://mominraza.github.io",
+	"license": "GPLv2",
+	"update_uri": "https://raw.githubusercontent.com/MominRaza/question-content-below-title/master/metadata.json",
+	"min_q2a": "1.7",
+	"min_php": "5.1",
+	"load_order": "after_db_init"
+}

@@ -9,6 +9,9 @@ class question_content_admin
 			case 'question_content_max_len':
 				return 260;
 
+			case 'question_title_max_len':
+				return 120;
+
 			case 'question_content_css':
                 return '.question-content-text{
 	font-size: 14px;
@@ -39,6 +42,7 @@ class question_content_admin
 		if (qa_clicked('question_content_save_button')) {
 			qa_opt('question_content_on', (int) qa_post_text('question_content_on_field'));
 			qa_opt('question_content_max_len', (int) qa_post_text('question_content_max_len_field'));
+			qa_opt('question_title_max_len', (int) qa_post_text('question_title_max_len_field'));
 			qa_opt('question_image_on', (int) qa_post_text('question_image_on_field'));
 			qa_opt('question_content_css', (string) qa_post_text('question_content_css_field'));
 
@@ -46,6 +50,7 @@ class question_content_admin
 		}
 		else if (qa_clicked('question_content_reset_button')) {
 			qa_opt('question_content_max_len', (int) $this->option_default('question_content_max_len'));
+			qa_opt('question_title_max_len', (int) $this->option_default('question_title_max_len'));
 			qa_opt('question_content_css', (string) $this->option_default('question_content_css'));
 
 			$ok = qa_lang('admin/options_reset');
@@ -53,6 +58,7 @@ class question_content_admin
 
 		qa_set_display_rules($qa_content, array(
 			'question_content_max_len_display' => 'question_content_on_field',
+			'question_title_max_len_display' => 'question_content_on_field',
 		));
 
 		return array(
@@ -72,6 +78,14 @@ class question_content_admin
 					'type' => 'number',
 					'value' => (int) qa_opt('question_content_max_len'),
 					'tags' => 'name="question_content_max_len_field"',
+				),
+				array(
+					'id' => 'question_title_max_len_display',
+					'label' => 'Only show if question title length is less than:',
+					'suffix' => 'characters',
+					'type' => 'number',
+					'value' => (int) qa_opt('question_title_max_len'),
+					'tags' => 'name="question_title_max_len_field"',
 				),
 				array(
 					'label' => 'Shows question\'s first image in question lists',

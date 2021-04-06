@@ -22,6 +22,7 @@ class qa_html_theme_layer extends qa_html_theme_base
 			if (!empty($postids)) {
 				// Retrieve the content for these questions from the database
 				$maxlength = qa_opt('question_content_max_len');
+				$maxtitle = qa_opt('question_title_max_len');
 				$result = qa_db_query_sub('SELECT postid, content, format FROM ^posts WHERE postid IN (#)', $postids);
 				$postinfo = qa_db_read_all_assoc($result, 'postid');
 
@@ -35,7 +36,7 @@ class qa_html_theme_layer extends qa_html_theme_base
 					if (isset($postinfo[$question['raw']['postid']])) {
 						$thispost = $postinfo[$question['raw']['postid']];
 						$title = isset($question['title']) ? $question['title'] : '';
-						if (qa_opt('question_content_on')) {
+						if (qa_opt('question_content_on') && strlen($title) <= $maxtitle) {
 							$text = qa_viewer_text($thispost['content'], $thispost['format'], array('blockwordspreg' => $blockwordspreg));
 							$text = preg_replace('/\s+/', ' ', $text);  // Remove duplicated blanks, new line characters, tabs, etc
 							$text = $this->qam_shorten_string_line($text, $maxlength);
